@@ -1,3 +1,20 @@
+// ── PWA: Service Worker Registration & Install Prompt ──
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('✅ Service Worker registered:', reg.scope))
+            .catch(err => console.log('❌ SW registration failed:', err));
+    });
+}
+
+// Capture the install prompt for later use
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    console.log('📱 App install prompt is available');
+});
+
 // State
 let cart = JSON.parse(localStorage.getItem('plantHavenCart')) || [];
 let productsList = JSON.parse(localStorage.getItem('plantHavenProducts')) || [];
@@ -90,6 +107,17 @@ function init() {
     renderStory();
     renderSocialLinks();
     setupEventListeners();
+    
+    // Register Service Worker for PWA
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js').then(reg => {
+                console.log('ServiceWorker registered with scope:', reg.scope);
+            }).catch(err => {
+                console.error('ServiceWorker registration failed:', err);
+            });
+        });
+    }
 }
 
 function renderHeroButtons() {
@@ -722,7 +750,7 @@ function openCart() {
 
 function closeAllDrawers() {
     const overlay = getEl('overlay');
-    document.querySelectorAll('.modal, .cart-drawer').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.modal, .cart-drawer, .mobile-sidebar').forEach(el => el.classList.remove('active'));
     if (overlay) overlay.classList.remove('active');
 }
 
@@ -762,6 +790,16 @@ function setupEventListeners() {
     get('closeCategoryManager')?.addEventListener('click', closeAllDrawers);
     get('closeCheckout')?.addEventListener('click', closeAllDrawers);
     get('overlay')?.addEventListener('click', closeAllDrawers);
+    
+    get('mobileMenuBtn')?.addEventListener('click', () => {
+        get('mobileSidebar')?.classList.add('active');
+        get('overlay')?.classList.add('active');
+    });
+    
+    get('closeMenuBtn')?.addEventListener('click', () => {
+        get('mobileSidebar')?.classList.remove('active');
+        get('overlay')?.classList.remove('active');
+    });
     
     get('searchInput')?.addEventListener('input', handleSearch);
     get('loginForm')?.addEventListener('submit', handleLogin);
@@ -816,10 +854,16 @@ function setupEventListeners() {
         });
     });
 
-    navLinks.home.addEventListener('click', (e) => { e.preventDefault(); showView('home'); });
-    navLinks.accessories.addEventListener('click', (e) => { e.preventDefault(); showView('accessories'); });
-    navLinks.bestSellers.addEventListener('click', (e) => { e.preventDefault(); showView('bestSellers'); });
-    navLinks.careGuides.addEventListener('click', (e) => { e.preventDefault(); showView('careGuides'); });
+    navLinks.home.addEventListener('click', (e) => { e.preventDefault(); showView('home'); closeAllDrawers(); });
+    navLinks.accessories.addEventListener('click', (e) => { e.preventDefault(); showView('accessories'); closeAllDrawers(); });
+    navLinks.bestSellers.addEventListener('click', (e) => { e.preventDefault(); showView('bestSellers'); closeAllDrawers(); });
+    navLinks.careGuides.addEventListener('click', (e) => { e.preventDefault(); showView('careGuides'); closeAllDrawers(); });
+
+    // Mobile nav links
+    get('mobNavHome')?.addEventListener('click', (e) => { e.preventDefault(); showView('home'); closeAllDrawers(); });
+    get('mobNavAccessories')?.addEventListener('click', (e) => { e.preventDefault(); showView('accessories'); closeAllDrawers(); });
+    get('mobNavBestSellers')?.addEventListener('click', (e) => { e.preventDefault(); showView('bestSellers'); closeAllDrawers(); });
+    get('mobNavCareGuides')?.addEventListener('click', (e) => { e.preventDefault(); showView('careGuides'); closeAllDrawers(); });
 
     // Master Delegate for Admin and UI
     document.addEventListener('click', (e) => {

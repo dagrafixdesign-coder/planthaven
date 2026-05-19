@@ -8,11 +8,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0D2F2F">
+    <!-- iOS PWA support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Plant Haven">
+    <link rel="apple-touch-icon" href="assets/icon-192.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="header">
         <div class="container nav-wrapper">
+            <button class="icon-btn hamburger-btn" id="mobileMenuBtn" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
             <div class="logo" style="cursor: pointer;">
                 <div class="leaf-logo">
                     <svg width="35" height="35" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-svg">
@@ -26,7 +40,7 @@
                 <span class="mobile-text" style="font-family: 'Playfair Display', serif; font-weight: 700; color: #0D2F2F; letter-spacing: 1px; display: none;">DA PLANT HAVEN</span>
             </div>
 
-            <nav class="main-nav">
+            <nav class="main-nav" id="mainNav">
                 <a href="#" id="navHome" class="active">Collections</a>
                 <a href="#" id="navAccessories">Accessories</a>
                 <a href="#" id="navBestSellers">Best Sellers</a>
@@ -449,6 +463,17 @@
                 <p style="color: #666; font-size: 1.1rem; margin-bottom: 30px;">Our botanical couriers are preparing your specimens. Check your phone for updates.</p>
                 <button class="btn btn-primary" onclick="window.closeAllDrawers()">BACK TO SHOPPING</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <button class="close-btn" id="closeMenuBtn">&times;</button>
+        <div class="mobile-sidebar-links">
+            <a href="#" id="mobNavHome" class="active">Collections</a>
+            <a href="#" id="mobNavAccessories">Accessories</a>
+            <a href="#" id="mobNavBestSellers">Best Sellers</a>
+            <a href="#" id="mobNavCareGuides">Care Library</a>
         </div>
     </div>
 

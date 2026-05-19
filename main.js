@@ -1,10 +1,6 @@
-// ── PWA: Service Worker Registration & Install Prompt ──
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-            .then(reg => console.log('✅ Service Worker registered:', reg.scope))
-            .catch(err => console.log('❌ SW registration failed:', err));
-    });
+// ── PWA: Service Worker Registration ──
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./service-worker.js");
 }
 
 // Capture the install prompt for later use

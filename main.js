@@ -1,6 +1,8 @@
 // ── PWA: Service Worker Registration ──
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./service-worker.js");
+  navigator.serviceWorker.register("/planthaven/service-worker.js")
+    .then(() => console.log("✅ Service Worker registered"))
+    .catch((e) => console.error("❌ SW failed:", e));
 }
 
 // Capture the install prompt for later use

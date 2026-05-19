@@ -18,6 +18,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- PWA Install Banner (mobile only) -->
+    <div class="pwa-install-banner" id="pwaInstallBanner">
+        <div class="pwa-install-content">
+            <img src="assets/icon-192.png" alt="Plant Haven" class="pwa-install-icon">
+            <div class="pwa-install-text">
+                <strong>Plant Haven</strong>
+                <span>Install as app — works offline!</span>
+            </div>
+        </div>
+        <div class="pwa-install-actions">
+            <button class="pwa-install-btn" id="pwaInstallBtn">Install</button>
+            <button class="pwa-dismiss-btn" id="pwaDismissBtn">&times;</button>
+        </div>
+    </div>
+
     <header class="header">
         <div class="container nav-wrapper">
             <button class="icon-btn hamburger-btn" id="mobileMenuBtn" aria-label="Menu">

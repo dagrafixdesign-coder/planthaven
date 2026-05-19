@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Haven | Luxury Botanicals</title>
+    <meta name="description" content="Elevate your space with rare indoor plants. Curated selection, professional care guides, and premium botanical service.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container nav-wrapper">
+            <div class="logo" style="cursor: pointer;">
+                <div class="leaf-logo">
+                    <svg width="35" height="35" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-svg">
+                        <path d="M50 90C50 90 90 60 90 30C90 10 70 10 50 35C30 10 10 10 10 30C10 60 50 90 50 90Z" fill="#D4AF37"/>
+                        <path d="M50 90V35" stroke="#0D2F2F" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M50 70L70 50" stroke="#0D2F2F" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M50 50L30 30" stroke="#0D2F2F" stroke-width="4" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <span class="desktop-text" style="font-family: 'Playfair Display', serif; font-weight: 700; color: #0D2F2F; letter-spacing: 2px;">PLANT HAVEN</span>
+                <span class="mobile-text" style="font-family: 'Playfair Display', serif; font-weight: 700; color: #0D2F2F; letter-spacing: 1px; display: none;">DA PLANT HAVEN</span>
+            </div>
+
+            <nav class="main-nav">
+                <a href="#" id="navHome" class="active">Collections</a>
+                <a href="#" id="navAccessories">Accessories</a>
+                <a href="#" id="navBestSellers">Best Sellers</a>
+                <a href="#" id="navCareGuides">Care Library</a>
+            </nav>
+
+            <div class="nav-actions">
+                <div class="search-bar">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="searchInput" placeholder="Search...">
+                </div>
+                <button class="icon-btn cart-btn" id="cartToggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    <span class="cart-count">0</span>
+                </button>
+                <div id="adminStatus" class="admin-status-badge hidden">CURATOR</div>
+            </div>
+        </div>
+    </header>
+
+    <main id="mainContent">
+        <div id="homeView">
+            <section class="hero">
+                <div class="hero-bg" style="background-image: url('assets/hero.png');"></div>
+                <div class="container">
+                    <div class="hero-content">
+                        <h1>BRING HOME NATURE.</h1>
+                        <p>Curated rarities for the discerning botanical collector.</p>
+                        <div class="hero-btns" id="heroBtnContainer">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="featured-section" id="featured">
+                <div class="container">
+                    <h2 class="section-title">FEATURED SPECIMENS</h2>
+                    <p class="section-subtitle">Exceptional plants hand-picked for their unique character and vitality.</p>
+                    
+                    <div class="category-filters">
+                        <button class="filter-btn active" data-type="all">All Species</button>
+                        <button class="filter-btn" data-type="indoor">Indoor</button>
+                        <button class="filter-btn" data-type="outdoor">Outdoor</button>
+                    </div>
+
+                    <div class="product-grid" id="productGrid"></div>
+                </div>
+            </section>
+        </div>
+
+        <div id="bestSellersView" class="hidden">
+            <section class="featured-section">
+                <div class="container">
+                    <h2 class="section-title">BEST SELLERS</h2>
+                    <p class="section-subtitle">The most coveted plants in our collection, ranked by community preference.</p>
+                    <div class="product-grid" id="bestSellersGrid"></div>
+                </div>
+            </section>
+        </div>
+
+        <div id="accessoriesView" class="hidden">
+            <section class="featured-section">
+                <div class="container">
+                    <h2 class="section-title">BOTANICAL ACCESSORIES</h2>
+                    <p class="section-subtitle">Premium tools and care essentials for the discerning collector.</p>
+                    <div class="product-grid" id="accessoriesGrid"></div>
+                </div>
+            </section>
+        </div>
+
+        <div id="giftsView" class="hidden">
+            <section class="featured-section">
+                <div class="container">
+                    <h2 class="section-title">GIFT COLLECTIONS</h2>
+                    <p class="section-subtitle">Celebrate milestones with living art. The ultimate "Gift a Plant" experience.</p>
+                    <div class="product-grid" id="giftsGrid"></div>
+                </div>
+            </section>
+        </div>
+
+        <div id="careGuidesView" class="hidden">
+            <section class="care-section">
+                <div class="container">
+                    <h2 class="section-title">CARE LIBRARY</h2>
+                    <p class="section-subtitle">Expert horticultural guidance to help your collection flourish.</p>
+                    <div class="care-guides-grid" id="careGuidesGrid"></div>
+                </div>
+            </section>
+        </div>
+
+        <div id="aboutView" class="hidden">
+            <section class="about-section">
+                <div class="container">
+                    <h2 class="section-title">OUR STORY</h2>
+                    <div class="about-content">
+                        <p id="displayStoryText">At Plant Haven, we treat plants as living art. Our mission is to bridge the gap between urban living and the profound tranquility of the natural world.</p>
+                        <div class="quote-card">
+                            <p class="quote-text" id="displayQuoteText">"To plant a garden is to believe in tomorrow."</p>
+                            <p class="quote-author" id="displayQuoteAuthor">— Audrey Hepburn</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="adminView" class="hidden">
+            <section class="featured-section">
+                <div class="container">
+                    <div class="admin-header-actions">
+                        <h2 class="section-title" style="margin:0; text-align: left; font-size: 2.2rem;">ADMIN CONTROL</h2>
+                        <div class="admin-action-group">
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn-admin btn-admin-teal" onclick="window.openStoryModal()" title="Edit Brand Story">STORY</button>
+                                <button class="btn-admin btn-admin-teal" onclick="window.openCategoryManager('Accessory')" title="Manage Accessories">ACCESSORIES</button>
+                                <button class="btn-admin btn-admin-teal" onclick="window.openCategoryManager('Gift')" title="Manage Gifts">GIFTS</button>
+                            </div>
+                            <div style="display: flex; gap: 8px; border-left: 1px solid rgba(0,0,0,0.1); padding-left: 15px; margin-left: 5px;">
+                                <button class="btn-admin btn-admin-gold" onclick="window.openAddPlantModal('Plant')" title="Add New Plant">+ PLANT</button>
+                                <button class="btn-admin btn-admin-gold" onclick="window.openAddPlantModal('Accessory')" title="Add New Accessory">+ ACC</button>
+                                <button class="btn-admin btn-admin-gold" onclick="window.openAddPlantModal('Gift')" title="Add New Gift">+ GIFT</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="adminTabsContainer"></div>
+                    
+                    <div class="admin-stats">
+                        <div class="stat-card">
+                            <h4>Total Sales</h4>
+                            <div class="stat-value" id="statTotalSales">Rs.0.00</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Units Sold</h4>
+                            <div class="stat-value" id="statUnitsSold">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Inventory Value</h4>
+                            <div class="stat-value" id="statInventoryValue">Rs.0.00</div>
+                        </div>
+                    </div>
+
+                    <div class="admin-grid" id="adminGrid"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <div class="logo">
+                        <span style="color: #D4AF37">DA PLANT HAVEN</span>
+                    </div>
+                    <p>Luxury botanicals for the modern lifestyle.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Explore</h4>
+                    <a href="#" onclick="window.showView('home')">Collections</a>
+                    <a href="#" onclick="window.showView('accessories')">Accessories</a>
+                    <a href="#" onclick="window.showView('gifts')">Gifts</a>
+                    <a href="#" onclick="window.showView('bestSellers')">Best Sellers</a>
+                    <a href="#" onclick="window.showView('careGuides')">Care Library</a>
+                    <a href="#" id="adminLoginBtn" style="opacity: 0.6; font-size: 0.75rem; margin-top: 15px; display: block; color: #D4AF37; font-weight: 600;">ADMIN ACCESS</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Concierge</h4>
+                    <a href="#" onclick="window.showView('about')">Our Story</a>
+                    <a href="#">Shipping</a>
+                    <a href="#">Privacy</a>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Be the first to know about new botanical drops.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email address">
+                        <button class="btn btn-secondary">JOIN</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="social-links-footer" id="socialFooter">
+                    <!-- Icons injected by JS -->
+                </div>
+                <p style="margin-top: 30px; opacity: 0.4; font-size: 0.75rem;">&copy; 2026 Plant Haven Botanicals. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bag Drawer -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3>Your Pot</h3>
+            <button class="close-btn" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Subtotal</span>
+                <span id="cartTotal">Rs.0.00</span>
+            </div>
+            <button class="btn btn-primary full-width" onclick="window.checkout()">CHECKOUT</button>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <button class="close-btn modal-close" id="closeModal">&times;</button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="close-btn modal-close" id="closeLogin">&times;</button>
+            <h2 style="margin-bottom: 30px; text-align: center;">Admin Access</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="username" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="" required>
+                </div>
+                <button type="submit" class="btn btn-primary full-width">SIGN IN</button>
+                <div style="text-align: center; margin-top: 15px;">
+                    <button type="button" id="forgotPassword" class="link-btn">Forgot Password?</button>
+                </div>
+                <p id="loginError" style="color: #c00; margin-top: 15px; font-size: 0.85rem; text-align: center;" class="hidden">Invalid credentials.</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Plant Modal -->
+    <div class="modal" id="addPlantModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <button class="close-btn modal-close" id="closeAddPlant">&times;</button>
+            <h2 style="margin-bottom: 30px; text-align: center;" id="addModalTitle">Add New Plant</h2>
+            <form id="addPlantForm" class="add-plant-form">
+                <div class="form-group" id="groupAddName">
+                    <label>Product Name</label>
+                    <input type="text" id="addName" required placeholder="e.g. Blue Star Fern">
+                </div>
+                <div class="form-group" id="groupAddScientific">
+                    <label>Scientific Name</label>
+                    <input type="text" id="addScientific" placeholder="e.g. Phlebodium aureum">
+                </div>
+                <div class="form-group" id="groupAddPrice">
+                    <label>Price (Rs.)</label>
+                    <input type="number" id="addPrice" required placeholder="599">
+                </div>
+                <div class="form-group" id="groupAddStock">
+                    <label>Initial Stock</label>
+                    <input type="number" id="addStock" required placeholder="10">
+                </div>
+                <div class="form-group" id="groupAddType">
+                    <label>Category</label>
+                    <select id="addType" class="admin-input">
+                        <option value="Indoor">Indoor Plant</option>
+                        <option value="Outdoor">Outdoor Plant</option>
+                        <option value="Accessory">Botanical Accessory</option>
+                        <option value="Gift">Gift Collection</option>
+                    </select>
+                </div>
+                <div class="form-group full-span" id="groupAddImage">
+                    <label>Image URL</label>
+                    <input type="text" id="addImage" required placeholder="assets/pothos.png">
+                    <div id="imagePreviewContainer" class="image-preview-container">
+                        <img id="imagePreview" src="" alt="Preview" class="hidden">
+                        <div id="previewPlaceholder" class="preview-placeholder">Image Preview</div>
+                    </div>
+                </div>
+                <div class="form-group" id="groupAddLight">
+                    <label>Light Needs</label>
+                    <input type="text" id="addLight" placeholder="e.g. Bright indirect light">
+                </div>
+                <div class="form-group" id="groupAddWater">
+                    <label>Watering</label>
+                    <input type="text" id="addWater" placeholder="e.g. Once a week">
+                </div>
+                <div class="form-group" id="groupAddHumidity">
+                    <label>Humidity</label>
+                    <input type="text" id="addHumidity" placeholder="e.g. Moderate humidity">
+                </div>
+                <div class="form-group full-span" id="groupAddDesc">
+                    <label>Description</label>
+                    <textarea id="addDesc" class="admin-input" style="height: 80px;" required placeholder="Describe the item..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary full-span" id="addSubmitBtn">ADD TO COLLECTION</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Story Modal -->
+    <div class="modal" id="storyModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <button class="close-btn modal-close" id="closeStory">&times;</button>
+            <h2 style="margin-bottom: 30px; text-align: center;">Edit Our Story</h2>
+            <form id="storyForm" class="add-plant-form">
+                <div class="form-group full-span">
+                    <label>Brand Mission</label>
+                    <textarea id="editStoryText" class="admin-input" style="height: 120px;" required></textarea>
+                </div>
+                <div class="form-group full-span">
+                    <label>Signature Quote</label>
+                    <input type="text" id="editQuoteText" required>
+                </div>
+                <div class="form-group full-span">
+                    <label>Quote Author</label>
+                    <input type="text" id="editQuoteAuthor" required>
+                </div>
+                <button type="submit" class="btn btn-primary full-span">UPDATE STORY</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Category Manager Modal -->
+    <div class="modal" id="categoryManagerModal">
+        <div class="modal-content" style="max-width: 900px; padding: 40px;">
+            <button class="close-btn modal-close" id="closeCategoryManager">&times;</button>
+            <h2 id="categoryManagerTitle" style="margin-bottom: 30px; text-align: center; font-family: 'Playfair Display', serif;">Manage Collection</h2>
+            <div id="categoryManagerGrid" class="admin-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-content" style="max-width: 700px;">
+            <button class="close-btn modal-close" id="closeCheckout">&times;</button>
+            
+            <div id="checkoutSteps">
+                <div class="checkout-header">
+                    <h2 id="checkoutStepTitle">Shipping Details</h2>
+                    <div class="step-indicator">
+                        <span class="step active" id="step1">1</span>
+                        <span class="step" id="step2">2</span>
+                    </div>
+                </div>
+
+                <form id="checkoutForm">
+                    <!-- Step 1: Shipping -->
+                    <div id="shippingStep">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="shipName" required placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" id="shipPhone" required placeholder="98XXXXXXXX">
+                            </div>
+                            <div class="form-group full-span">
+                                <label>Delivery Address</label>
+                                <textarea id="shipAddress" class="admin-input" style="height: 80px;" required placeholder="Your botanical haven's location..."></textarea>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary full-width" onclick="window.nextCheckoutStep()">PROCEED TO PAYMENT</button>
+                    </div>
+
+                    <!-- Step 2: Payment -->
+                    <div id="paymentStep" class="hidden">
+                        <div class="payment-methods">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="esewa" checked>
+                                <div class="payment-box esewa-box">
+                                    <span class="payment-logo">eSewa</span>
+                                    <span>eSewa Wallet</span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="mobile_banking">
+                                <div class="payment-box">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                                    <span>Mobile Banking (QR)</span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="card">
+                                <div class="payment-box">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                                    <span>Credit / Debit Card</span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="cod">
+                                <div class="payment-box">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg>
+                                    <span>Cash on Delivery</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <!-- QR Display Section -->
+                        <div id="qrDisplaySection" class="hidden qr-display-section">
+                            <p>Scan to Pay via Mobile Banking</p>
+                            <div class="qr-container">
+                                <img id="bankQRImage" src="bank_qr_placeholder.png" alt="Bank QR Code">
+                            </div>
+                            <p class="qr-note">Transfer the total amount to complete your adoption.</p>
+                        </div>
+                        
+                        <div id="orderSummary" class="order-summary">
+                            <!-- Populated by JS -->
+                        </div>
+
+                        <button type="submit" class="btn btn-primary full-width">CONFIRM ORDER</button>
+                        <button type="button" class="btn btn-outline full-width" style="margin-top: 10px" onclick="window.prevCheckoutStep()">BACK TO SHIPPING</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="checkoutSuccess" class="hidden" style="text-align: center; padding: 40px 0;">
+                <div class="success-icon">✓</div>
+                <h2 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 20px;">Order Placed!</h2>
+                <p style="color: #666; font-size: 1.1rem; margin-bottom: 30px;">Our botanical couriers are preparing your specimens. Check your phone for updates.</p>
+                <button class="btn btn-primary" onclick="window.closeAllDrawers()">BACK TO SHOPPING</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <script src="products.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
